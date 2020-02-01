@@ -1,0 +1,48 @@
+[  {
+  "family": "MaterialIcons",
+  "fonts": [
+    {
+      "asset": "fonts/MaterialIcons-Regular.ttf"
+    }
+  ]
+},
+  {
+    "family": "Raleway",
+    "fonts": [
+      {
+        "asset": "fonts/Raleway/Raleway-Regular.ttf"
+      },
+      {
+        "asset": "fonts/Raleway/Raleway-Italic.ttf",
+        "style": "italic"
+      }
+    ]
+  },
+  {
+    "family": "PermanentMarker",
+    "fonts": [
+      {
+        "asset": "fonts/PermanentMarker/PermanentMarker-Regular.ttf",
+        "weight": 700
+      }
+    ]
+  },
+  {
+    "family": "Inconsolata",
+    "fonts": [
+      {
+        "asset": "fonts/Inconsolata/Inconsolata-Regular.ttf",
+        "weight": 700
+      }
+    ]
+  },
+  {
+    "family": "Lato",
+    "fonts": [
+      {
+        "asset": "fonts/Lato/Lato-Regular.ttf",
+        "weight": 700
+      }
+    ]
+  }
+]
