@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:matwright_dev/source/AppLocalizations.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class HomeIntro extends StatelessWidget {
@@ -8,7 +9,7 @@ class HomeIntro extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    Locale myLocale = Localizations.localeOf(context);
     return ResponsiveBuilder(builder: (context, sizingInformation)
     {
       var letterSpacing=1.5;
@@ -50,22 +51,25 @@ switch(sizingInformation.deviceScreenType){
             SizedBox(
               height: 5,
             ),
-            Text(
-              'CREATIVE APP DEVELOPMENT',
-              style: TextStyle(
-                fontSize: titleSize,
+            Center(
+              child:          Text(
+                AppLocalizations(myLocale).homeTitle,
+                style: TextStyle(
+                  fontSize: titleSize,
 
-                fontFamily: "Raleway",
-                letterSpacing: letterSpacing,
-                shadows: [],
+                  fontFamily: "Raleway",
+                  letterSpacing: letterSpacing,
+                  shadows: [],
+                ),
+                textAlign: textAlignment,
               ),
-              textAlign: textAlignment,
             ),
+
             SizedBox(
               height: 30,
             ),
             Text(
-              'I specialise in creating modern apps for a variety of plaforms and endpoints including mobile, web & internet of things.',
+              AppLocalizations(myLocale).homeDescription,
               style: TextStyle(fontSize: descriptionSize, height: 1.7),  textAlign: textAlignment,
             ),
           ],

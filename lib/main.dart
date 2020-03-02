@@ -1,8 +1,11 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:matwright_dev/source/screen/about/About.dart';
+import 'package:matwright_dev/source/screen/contact/Contact.dart';
 import 'package:matwright_dev/source/screen/home/Home.dart';
+import 'package:matwright_dev/source/screen/legal/Legal.dart';
+import 'package:matwright_dev/source/screen/terms/Terms.dart';
 
 
 void main() => runApp(MyApp());
@@ -30,9 +33,15 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.dark,
         darkTheme: darkTheme,
       home: Home(title: 'Mat Wright Home Page'),
-    routes: {
+      initialRoute: '/',
+      routes: {
 
-    }
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/about': (context) => About(),
+        '/contact': (context) => Contact(),
+        '/legal': (context) => Legal(),
+        '/terms': (context) => Terms(),
+      },
     );
   }
 }

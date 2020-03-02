@@ -1,4 +1,11 @@
 [  {
+  "family": "SocialIcons",
+  "fonts": [
+    {
+      "asset": "fonts/SocialIcons.ttf"
+    }
+  ]
+},{
   "family": "MaterialIcons",
   "fonts": [
     {

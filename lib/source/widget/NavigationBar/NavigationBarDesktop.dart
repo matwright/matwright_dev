@@ -1,45 +1,54 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:matwright_dev/source/widget/NavigationBar/NavigationBarItem.dart';
-import 'package:matwright_dev/source/widget/NavigationBar/NavigationBarLogo.dart';
-class NavigationBarDesktop extends StatelessWidget {
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'package:matwright_dev/source/widget/LatestPostsWidget.dart';
+
+class NavigationBarDesktop extends StatefulWidget {
+  @override
+  _NavigationBarDesktopState createState() => _NavigationBarDesktopState();
+}
+
+class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
+
+
   @override
   Widget build(BuildContext context) {
+
+    Locale myLocale = Localizations.localeOf(context);
+
     return Container(
-      height: 150,
+      height: 175,
 
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
 
+        Expanded(
+        flex: 5, // 20%
 
-         Image.asset('assets/logoWhite.png'),
+        child:
+            Align(alignment:Alignment.topLeft, child:Image.asset('assets/logoWhite.png')))
+         ,
+      Expanded(
+        flex: 1, // 20%
 
-
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              NavigationBarItem('Bio',Icons.face),
-              SizedBox(
-                width: 20,
-              ),
-              NavigationBarItem('Blog',Icons.collections_bookmark),
-              SizedBox(
-                width: 20,
-              ),
-
-              NavigationBarItem('Stuff',Icons.build),
-              SizedBox(
-                width: 20,
-              ),
-              NavigationBarItem('Art',Icons.format_paint),
-              SizedBox(
-                width: 20,
-              ),
-              NavigationBarItem('Connect',Icons.chat),
-            ],
-          )
+        child:
+          SizedBox(
+            width: 30,
+          ),
+      ),
+        //  listPosts()
+      Expanded(
+        flex: 4, // 20%
+        child:
+        Align(alignment:Alignment.topRight, child:
+      LatestPostsWidget())
+      )
         ],
       ),
     );
   }
+
 }

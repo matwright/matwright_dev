@@ -1,37 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:matwright_dev/source/AppLocalizations.dart';
+import 'package:matwright_dev/source/widget/AppBar/AppBarDesktop.dart';
+import 'package:matwright_dev/source/widget/AppBar/AppBarMobile.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 class AppBarMain extends StatelessWidget implements PreferredSizeWidget {
   final double height=40;
-  const AppBarMain({
-    Key key
+  final String title;
+
+   AppBarMain({
+    Key key,this.title
   }) : super(key: key);
   @override
   Size get preferredSize => Size.fromHeight(height);
   @override
   Widget build(BuildContext context) {
-
-    return AppBar(
-      centerTitle: true,
-      elevation: 0.0,
-      title: Text("Mat Wright - Creative App Development",),
-      leading: ScreenTypeLayout(
-        mobile:    IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-        ),
-        tablet: Icon(Icons.account_circle),
-      ),
-
-      actions: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Icon(
-            Icons.search,
-            color: Colors.black,
-          ),
-        )
-      ],
+    return ScreenTypeLayout(
+        mobile:    AppBarMobile(title: title,),
+        tablet: AppBarDesktop(title: title)
     );
   }
 }
