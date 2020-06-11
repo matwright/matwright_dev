@@ -14,7 +14,7 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
   flutter: ">=1.14.6 <2.0.0"
 
 dependencies:
@@ -24,10 +24,12 @@ dependencies:
     sdk: flutter
   meta: ^1.1.7
   bloc: ^3.0.0
-  flutter_webview_plugin: 0.3.10+1
+  flutter_chips_input: 1.9.0-dev.1
+  flutter_webview_plugin: 0.3.11
+  cloud_firestore: 0.13.4
   webview_flutter: ^0.3.19+8
   flutter_widget_from_html_core: 0.3.2+1
-  flutter_form_builder: 3.8.0+1
+  flutter_form_builder:  ^3.10.1
   flutter_bloc: ^3.2.0
   flutter_localizations:
     sdk: flutter
@@ -81,6 +83,7 @@ flutter:
     - assets/matwright.jpg
     - assets/flare/mw.flr
     - assets/flare/Coding.flr
+    - space.mp3
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

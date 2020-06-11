@@ -16,7 +16,6 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
   @override
   Widget build(BuildContext context) {
 
-    Locale myLocale = Localizations.localeOf(context);
 
     return Container(
       height: 175,

@@ -1,6 +1,4 @@
 import 'dart:developer';
-import 'dart:html';
-
 import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +33,6 @@ class _LatestPostsWidgetState extends State<LatestPostsWidget> {
   @override
   Widget build(BuildContext context) {
 
-    Locale myLocale = Localizations.localeOf(context);
 
     return listPosts();
   }

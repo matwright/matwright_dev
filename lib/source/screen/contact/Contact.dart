@@ -1,13 +1,13 @@
-
-import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:matwright_dev/source/AppLocalizations.dart';
 import 'package:matwright_dev/source/widget/AppBar/AppBarMain.dart';
 import 'package:matwright_dev/source/widget/CenteredView.dart';
 import 'package:matwright_dev/source/widget/NavigationBar/BottomNav.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
+
 class Contact extends StatefulWidget {
   Contact({Key key, this.title}) : super(key: key);
 
@@ -27,115 +27,129 @@ class Contact extends StatefulWidget {
 }
 
 class _ContactState extends State<Contact> {
-
   @override
   Widget build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);
 
     return Scaffold(
-      appBar:  AppBarMain(title:AppLocalizations(myLocale).translate('contactTitle')),
-
-      body: CenteredView(
-
-        child: Column(
-
-children: <Widget>[
-
-
-  Column(
-    children: <Widget>[
-      Container(
-        height: MediaQuery.of(context).size.height.toDouble()-200,
-        child:  FormBuilder(
-          key: _fbKey,
-
-          autovalidate: true,
-          child: ListView(
+        appBar: AppBarMain(
+            title: AppLocalizations(myLocale).translate('contactTitle')),
+        body: CenteredView(
+          child: Column(
             children: <Widget>[
-              FormBuilderTextField(
-                attribute: "name",
-                validators: [FormBuilderValidators.min(3),FormBuilderValidators.required()],
-                decoration:
-                InputDecoration(labelText:AppLocalizations(myLocale).translate('contactName')),
-              )
-              ,
-
-              FormBuilderTextField(
-                attribute: "email",
-                validators: [FormBuilderValidators.email(),FormBuilderValidators.required()],
-                decoration:
-                InputDecoration(labelText: AppLocalizations(myLocale).translate('contactEmail')),
-              )
-              ,
-
-
-
-              FormBuilderFilterChip(
-                decoration: InputDecoration(labelText:AppLocalizations(myLocale).translate('contactQuery'),labelStyle: TextStyle(fontSize: 21,fontWeight: FontWeight.normal)),
-                attribute: "project_type",
-                options: [
-                  FormBuilderFieldOption(
-                      child: Text(AppLocalizations(myLocale).translate('mobile')),
-                      value: "mobile"
+              Column(
+                children: <Widget>[
+                  Container(
+                    height: MediaQuery.of(context).size.height.toDouble() - 200,
+                    child: FormBuilder(
+                      key: _fbKey,
+                      autovalidate: true,
+                      child: ListView(
+                        children: <Widget>[
+                          FormBuilderTextField(
+                            attribute: "name",
+                            validators: [
+                              FormBuilderValidators.min(3),
+                              FormBuilderValidators.required()
+                            ],
+                            decoration: InputDecoration(
+                                labelText: AppLocalizations(myLocale)
+                                    .translate('contactName')),
+                          ),
+                          FormBuilderTextField(
+                            attribute: "email",
+                            validators: [
+                              FormBuilderValidators.email(),
+                              FormBuilderValidators.required()
+                            ],
+                            decoration: InputDecoration(
+                                labelText: AppLocalizations(myLocale)
+                                    .translate('contactEmail')),
+                          ),
+                          FormBuilderFilterChip(
+                            decoration: InputDecoration(
+                                labelText: AppLocalizations(myLocale)
+                                    .translate('contactQuery'),
+                                labelStyle: TextStyle(
+                                    fontSize: 21,
+                                    fontWeight: FontWeight.normal)),
+                            attribute: "category",
+                            options: [
+                              FormBuilderFieldOption(
+                                  child: Text(AppLocalizations(myLocale)
+                                      .translate('mobile')),
+                                  value: "mobile"),
+                              FormBuilderFieldOption(
+                                  child: Text(AppLocalizations(myLocale)
+                                      .translate('web')),
+                                  value: "web"),
+                              FormBuilderFieldOption(
+                                  child: Text(AppLocalizations(myLocale)
+                                      .translate('vr')),
+                                  value: "vr"),
+                              FormBuilderFieldOption(
+                                  child: Text(AppLocalizations(myLocale)
+                                      .translate('contactAR')),
+                                  value: "ar"),
+                              FormBuilderFieldOption(
+                                  child: Text(AppLocalizations(myLocale)
+                                      .translate('contactWearable')),
+                                  value: "wearable"),
+                              FormBuilderFieldOption(
+                                  child: Text(AppLocalizations(myLocale)
+                                      .translate('contactML')),
+                                  value: "ml"),
+                              FormBuilderFieldOption(
+                                  child: Text(AppLocalizations(myLocale)
+                                      .translate('research')),
+                                  value: "research"),
+                            ],
+                          ),
+                          FormBuilderTextField(
+                            attribute: 'details',
+                            maxLines: 5,
+                            validators: [FormBuilderValidators.required()],
+                            decoration: InputDecoration(
+                                labelText: AppLocalizations(myLocale)
+                                    .translate('contactMessage')),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                  FormBuilderFieldOption(
-                      child: Text(AppLocalizations(myLocale).translate('web')),
-                      value: "web"
-                  ),
-                  FormBuilderFieldOption(
-                      child: Text(AppLocalizations(myLocale).translate('vr')),
-                      value: "vr"
-                  ),
-                  FormBuilderFieldOption(
-                      child: Text(AppLocalizations(myLocale).translate('contactAR')),
-                      value: "ar"
-                  ),
-                  FormBuilderFieldOption(
-                      child: Text(AppLocalizations(myLocale).translate('contactWearable')),
-                      value: "wearable"
-                  ),
-                  FormBuilderFieldOption(
-                      child: Text(AppLocalizations(myLocale).translate('research')),
-                      value: "research"
-                  ),
+                  Row(
+                    children: <Widget>[
+                      MaterialButton(
+                        child: Text(
+                            AppLocalizations(myLocale).translate('submit')),
+                        onPressed: () {
+                          if (_fbKey.currentState.saveAndValidate()) {
+                            Firestore.instance
+                                .collection('message')
+                                .document()
+                                .setData({
+                              'name': _fbKey.currentState.value['name'],
+                              'email': _fbKey.currentState.value['email'],
+                              'details': _fbKey.currentState.value['details'],
+                              'category': _fbKey.currentState.value['category']
+                            });
+                          }
+                        },
+                      ),
+                      MaterialButton(
+                        child:
+                            Text(AppLocalizations(myLocale).translate('reset')),
+                        onPressed: () {
+                          _fbKey.currentState.reset();
+                        },
+                      ),
+                    ],
+                  )
                 ],
-              ),
-              FormBuilderTextField(attribute: 'info',maxLines: 5,
-                  validators: [FormBuilderValidators.required()]
-                  ,
-                decoration: InputDecoration(labelText: AppLocalizations(myLocale).translate('contactMessage')),
               )
             ],
           ),
         ),
-      )
-     ,
-      Row(
-        children: <Widget>[
-          MaterialButton(
-            child: Text(AppLocalizations(myLocale).translate('submit')),
-            onPressed: () {
-              if (_fbKey.currentState.saveAndValidate()) {
-                print(_fbKey.currentState.value);
-              }
-            },
-          ),
-          MaterialButton(
-            child: Text(AppLocalizations(myLocale).translate('reset')),
-            onPressed: () {
-              _fbKey.currentState.reset();
-            },
-          ),
-        ],
-      )
-    ],
-  )
-
-
-          ],
-        ),
-      )
-        ,bottomNavigationBar: BottomNav(selectedIndex: 2)
-    );
+        bottomNavigationBar: BottomNav(selectedIndex: 2));
   }
 }

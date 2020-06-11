@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:matwright_dev/source/AppLocalizations.dart';
 import 'package:matwright_dev/source/widget/AppBar/AppBarMain.dart';
 import 'package:matwright_dev/source/widget/NavigationBar/BottomNav.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'dart:async';
 class Terms extends StatefulWidget {
   Terms({Key key, this.title}) : super(key: key);
@@ -36,7 +34,6 @@ class _TermsState extends State<Terms> {
     Locale myLocale = Localizations.localeOf(context);
 
 
-    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar:  AppBarMain(title:AppLocalizations(myLocale).translate('terms')),
 
